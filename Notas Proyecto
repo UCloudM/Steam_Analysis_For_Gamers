@@ -1,0 +1,25 @@
+1) ¿Que procesador comprar para jugar a un juego?
+-------------------------------------------------
+Coger los requerimientos minimos o recomendados de un juego y obtener los ghz del procesador (y cores?). Esto hacer un match con el dataset de intel y AMD y obtener todos los posibles procesadores que debería tener para poder jugar a ese juego.
+Esto tambien podría hacerse a la inversa: ¿qué juegos puedo jugar, teniendo un procesador de tantos cores y tantos herzios.  
+
+2) Graficas de lo anterior
+--------------------------
+Como han ido evolucionando los requisitos (hz, cores) en los juegos a lo largo de los años (cogiendo el año del lanzamiento del juego)
+
+
+3) 
+
+Desarrolladora - Categoria - Media rating de los juegos
+------------------------
+Ubisoft | Accion  | 7  |Se hace la media del rating de los juegos por categoría para cada 
+	|---------------desarrolladora.
+	| FPS     | 9  |Dado como entrada una desarrolladora y una categoría, decir si se
+------------------------recomiendan o no los juegos de esa empresa 
+Valve   | Accion  | 10 | 
+	|---------------
+	|Deportes | 12 |
+------------------------
+
+Junto a la salida de esta idea, hacer graficas comparativas entre las distintas desarrolladoras
+mostrando que, para la categoría elegida, la empresa que se ha elegido es recomendada o no
