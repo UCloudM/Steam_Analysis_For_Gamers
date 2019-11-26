@@ -11,15 +11,15 @@ Como han ido evolucionando los requisitos (hz, cores) en los juegos a lo largo d
 3) 
 
 Desarrolladora - Categoria - Media rating de los juegos
-------------------------
-Ubisoft | Accion  | 7  |Se hace la media del rating de los juegos por categoría para cada 
-	|---------------desarrolladora.
-	| FPS     | 9  |Dado como entrada una desarrolladora y una categoría, decir si se
-------------------------recomiendan o no los juegos de esa empresa 
-Valve   | Accion  | 10 | 
-	|---------------
-	|Deportes | 12 |
-------------------------
+-------------------------------------------------------
+Ubisoft | Accion  | [votosPositivos, votosNegativos]  | Se hace la media del rating de los juegos por categoría para cada
+	    |---------------------------------------------- desarrolladora.
+	    | FPS     | [1799212, 855]  | Dado como entrada una desarrolladora y una categoría, decir si se
+------------------------------------- recomiendan o no los juegos de esa empresa
+Valve   | Accion  | [10, 78767869]  |
+	    |----------------------------
+	    |Deportes | [2323, 897988]  |
+-------------------------------------
 
 Junto a la salida de esta idea, hacer graficas comparativas entre las distintas desarrolladoras
 mostrando que, para la categoría elegida, la empresa que se ha elegido es recomendada o no
