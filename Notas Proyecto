@@ -10,11 +10,11 @@ Como han ido evolucionando los requisitos (hz, cores) en los juegos a lo largo d
 
 3) 
 
-Desarrolladora - Categoria - Media rating de los juegos
+Desarrolladora - Genero - Media rating de los juegos
 -------------------------------------------------------
 Ubisoft | Accion  | [votosPositivos, votosNegativos]  | Se hace la media del rating de los juegos por categoría para cada
 	    |---------------------------------------------- desarrolladora.
-	    | FPS     | [1799212, 855]  | Dado como entrada una desarrolladora y una categoría, decir si se
+	    | FPS     | [17992, 855]  | Dado como entrada una desarrolladora y una categoría, decir si se
 ------------------------------------- recomiendan o no los juegos de esa empresa
 Valve   | Accion  | [10, 78767869]  |
 	    |----------------------------
