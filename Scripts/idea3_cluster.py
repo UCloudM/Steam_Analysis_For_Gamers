@@ -68,6 +68,8 @@ for row in developerList:
 
 ranking_sorted = sorted(ranking.items(), key=operator.itemgetter(1), reverse=True)
 
+print(ranking_sorted)
+
 with open("rankingPara" + str(genre) + ".csv", 'w') as myfile:
     wr = csv.writer(myfile)
     wr.writerow(["developer", "votes"])
