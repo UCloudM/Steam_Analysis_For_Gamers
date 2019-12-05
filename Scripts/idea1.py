@@ -1,5 +1,6 @@
 from pyspark import SparkConf, SparkContext, SQLContext
 from pyspark.sql import functions
+import string
 '''from pyspark.sql import Row
 from pyspark.sql.types import StringType
 import string
@@ -34,16 +35,14 @@ amdDF = amdDF.select("Model", "Family", "Platform", "Launch Date", "# of CPU cor
 
 steamDF = steamDF.select("appid", "name")
 
-reqDF = reqDF.select("steam_appid","minimum")
+reqDF = reqDF.select("steam_appid", "minimum")
 
 #LIMPIAMOS LOS DATASETS
 intelRDD = intelDF.rdd.filter(lambda p: (p["Vertical_Segment"] != ' 1600"') & (p["Vertical_Segment"] != '4'))
 
 
-reqRDD = reqDF.rdd.filter(lambda x: 'Hz' or 'hz' in x["minimum"])
-
-reqDF = reqRDD.toDF()
-
-split = functions.split(reqDF['minimum'], 'Hz' or 'hz')
-reqDF = reqDF.withColumn('Herzios', split.getItem(0))
+reqDF = reqDF.withColumn('minimum', functions.lower(functions.col('minimum')))
+reqDF = reqDF.filter(reqDF.minimum.contains('hz'))
+split = functions.split(reqDF['minimum'], ' ')
+reqDF = reqDF.withColumn('Herzios', split.getItem('hz'))
 reqDF.show(100)
