@@ -3,7 +3,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import sys
 
-datos = pd.read_csv('../datasets/steam.csv')
+datos = pd.read_csv('rankingParaAction.csv', nrows=10)
 df = pd.DataFrame(datos)
-aux1 = df[(df.genres =='Action')].groupby('developer')['positive_ratings'].sum().plot(kind='bar')
+aux1 = df.groupby(df.developer).sum().plot(kind='bar', legend = 'Reverse', color='black')
+plt.xlabel("Developers")
+plt.ylabel("Positives Votes")
+plt.title("Categoria: "+sys.argv[1])
 plt.show()
