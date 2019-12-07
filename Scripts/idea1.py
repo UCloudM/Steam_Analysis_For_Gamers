@@ -1,6 +1,8 @@
 from pyspark import SparkConf, SparkContext, SQLContext
 from pyspark.sql import functions
 import string
+import re
+
 '''from pyspark.sql import Row
 from pyspark.sql.types import StringType
 import string
@@ -9,16 +11,24 @@ import re'''
 
 
 conf = SparkConf().setMaster('local').setAppName('Script')
-sc = SparkContext(conf = conf)
+#sc = SparkContext(conf = conf)
 sqlContext = SQLContext(sc)
 
-# LEEMOS LOS DATASETS EN FORMATO CSV
-#----------------------------------
+#PATHS DE LOS DATASETS
+#-----------------------------
 pathSteam = "../datasets/steam.csv"
-pathReq = "../datasets/steam_requirements_data.csv"
+pathReq = "../datasets/steamReq.csv"
 pathIntel = "../datasets/Intel_CPUs.csv"
 pathAMD = "../datasets/amd.csv"
 
+#PARA LIMPIAR EL CSV
+'''req = sc.textFile("../datasets/steam_requirements_data.csv")
+req = req.map(lambda line: re.sub(r'<[^<>]+>', ' ', line))
+req = req.map(lambda line: re.sub(r"[\']", ' ', line))
+req.saveAsTextFile("steamReq.csv")'''
+
+# LEEMOS LOS DATASETS EN FORMATO CSV
+#----------------------------------
 steamDF = sqlContext.read.option("header", "true").csv(pathSteam)
 reqDF = sqlContext.read.option("header", "true").csv(pathReq)
 intelDF = sqlContext.read.option("header", "true").csv(pathIntel)
@@ -38,11 +48,22 @@ steamDF = steamDF.select("appid", "name")
 reqDF = reqDF.select("steam_appid", "minimum")
 
 #LIMPIAMOS LOS DATASETS
-intelRDD = intelDF.rdd.filter(lambda p: (p["Vertical_Segment"] != ' 1600"') & (p["Vertical_Segment"] != '4'))
-
+#-----------------------------------------------
+intelDF = intelDF[(~intelDF["Vertical_Segment"].contains(' 1600"')) &
+                  (~intelDF["Vertical_Segment"].contains('4')) &
+                  (~intelDF["Vertical_Segment"].contains('null')) &
+                  (~intelDF["Vertical_Segment"].contains('eDP/DP/HDMI'))]
 
 reqDF = reqDF.withColumn('minimum', functions.lower(functions.col('minimum')))
-reqDF = reqDF.filter(reqDF.minimum.contains('hz'))
-split = functions.split(reqDF['minimum'], ' ')
-reqDF = reqDF.withColumn('Herzios', split.getItem('hz'))
-reqDF.show(100)
+reqDF = reqDF[(reqDF["minimum"].contains("processor")) |
+              (reqDF["minimum"].contains("hz")) |
+              (reqDF["minimum"].contains("pentium"))]
+
+#MAPEAMOS EL DATASET DE INTEL
+#(Nº PROCESADOR, COLECCION, FRECUENCIA) <-- SE PUEDEN AÑADIR MAS VARIBABLES
+#----------------------------------------------
+intelRDD = intelDF.rdd.map(lambda p: (p["Processor_Number"], 
+                                     p["Product_Collection"],
+                                     p["Processor_Base_Frequency"]))
+
+reqDF.show(20, truncate=False)
