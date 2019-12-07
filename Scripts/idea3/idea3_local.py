@@ -7,7 +7,6 @@
 
 
 from pyspark import SparkConf, SparkContext, SQLContext
-from pyspark.sql import functions
 import operator
 import csv
 import sys
@@ -70,10 +69,8 @@ for developer in developerList:
 
 ranking_sorted = sorted(ranking.items(), key=operator.itemgetter(1), reverse=True)
 
-'''for num, deve in enumerate(ranking_sorted):
-    print(str(num) + " " + deve[0].encode('ascii'))'''
 
-with open("rankingPara" + str(genre) + ".csv", 'w') as myfile:
+with open("rankingPara" + str(genre) + "-" + str(dev) + ".csv", 'w') as myfile:
     wr = csv.writer(myfile, delimiter=",")
     wr.writerow(["developer", "votes"])
     for i in ranking_sorted:
