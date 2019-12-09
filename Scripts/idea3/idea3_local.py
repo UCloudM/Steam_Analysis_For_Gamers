@@ -29,7 +29,7 @@ genre = sys.argv[2]
 
 # LEEMOS EL DATASET EN FORMATO CSV
 # ----------------------------------
-pathSteam = "../datasets/steam.csv"
+pathSteam = "../../datasets/steam.csv"
 
 steamDF = sqlContext.read.option("header", "true").csv(pathSteam)
 

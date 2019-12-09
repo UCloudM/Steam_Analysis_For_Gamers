@@ -31,6 +31,7 @@ genre = sys.argv[2]
 # ----------------------------------
 pathSteam = "steam.csv"
 
+
 steamDF = sqlContext.read.option("header", "true").csv(pathSteam)
 
 # PREPARAMOS LAS VARIABLES QUE VAMOS A UTILIZAR
@@ -41,7 +42,6 @@ dataDF = steamDF.select("developer", "genres", "positive_ratings", "negative_rat
 developerDF = steamDF.select("developer").distinct()
 developerRDD = developerDF.rdd.map(lambda x: x["developer"].split(";")[0])
 developerList = developerRDD.collect()
-
 
 # ALGORITMO
 # ------------------------------------------------
@@ -70,13 +70,14 @@ for developer in developerList:
 
 ranking_sorted = sorted(ranking.items(), key=operator.itemgetter(1), reverse=True)
 
-print(ranking_sorted)
 
-with open("rankingPara" + str(genre) + ".csv", 'w') as myfile:
-    wr = csv.writer(myfile)
+with open("rankingPara" + str(genre) + "-" + str(dev) + ".csv", 'w') as myfile:
+    wr = csv.writer(myfile, delimiter=",")
     wr.writerow(["developer", "votes"])
     for i in ranking_sorted:
-        wr.writerow(i)
+        tup = [i[0].encode('utf-8'), i[1]]
+        wr.writerow(tup)
+
 
 recommendedDevelopers = ranking_sorted[0:3]
 
