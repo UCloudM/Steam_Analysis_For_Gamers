@@ -11,7 +11,7 @@ import re'''
 
 
 conf = SparkConf().setMaster('local').setAppName('Script')
-sc = SparkContext(conf = conf)
+#sc = SparkContext(conf = conf)
 sqlContext = SQLContext(sc)
 
 #PATHS DE LOS DATASETS
@@ -59,6 +59,8 @@ intelDF = intelDF[(~intelDF["Processor_Base_Frequency"].isNull()) &
 
 reqDF = reqDF.withColumn('minimum', functions.lower(functions.col('minimum')))
 reqDF = reqDF[(reqDF["minimum"].contains("hz"))]
+
+reqDF = reqDF.withColumn('minimum', functions.regexp_extract(reqDF['minimum'], '[0-9]*\.*[0-9]*', 0))
 
 #HAY 2 PROCESADORES CON FRECUENCIA EN MHZ Y AMBOS ESTAN MAL/INCOMPLETOS
 amdDF = amdDF[~amdDF["Base Clock"].contains("MHz")]
