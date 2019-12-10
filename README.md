@@ -1,7 +1,6 @@
 ------------------------------------------------------------
 
-<p align="center"><img src="https://github.com/UCloudM/Steam_Analysis_For_Gamers/blob/master/steam.jpg"></p>
-<h1 align="center"> Analysis for Gamers </h1>
+# Steam Analysis For Gamers
 
 ------------------------------------------------------------
 
@@ -33,6 +32,32 @@ Los scripts que se han desarrollado se pueden ver en su correspondiente carpeta 
 └── 
 ```
 
+# Requisitos
+
+* Sistema Operativo Linux
+* Python 3 
+* Apache Spark
+
+# Instalación en Ubuntu
+
+## Python
+```bash
+$ sudo apt-get install python3
+```
+
+## Spark
+```bash
+$ sudo curl -O http://d3kbcqa49mib13.cloudfront.net/spark-2.2.0-bin-hadoop2.7.tgz
+$ sudo tar xvf ./spark-2.2.0-bin-hadoop2.7.tgz
+$ sudo mkdir /usr/local/spark
+$ sudo cp -r spark-2.2.0-bin-hadoop2.7/* /usr/local/spark
+```
+
+## Configura el entorno 
+Añade la siguiente línea al archivo .source:
+```bash
+$ export PATH="$PATH:/usr/local/spark/bin"
+```
 
 # Datasets
 
