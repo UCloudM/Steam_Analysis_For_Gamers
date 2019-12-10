@@ -1,6 +1,9 @@
 ------------------------------------------------------------
 
-# Steam Analysis For Gamers
+<p align="center">
+  <img src="https://github.com/UCloudM/Steam_Analysis_For_Gamers/blob/master/steam.jpg">
+</p>
+<h1 align="center"> Analysis for Gamers </h1>
 
 ------------------------------------------------------------
 
@@ -59,6 +62,29 @@ Añade la siguiente línea al archivo .source:
 $ export PATH="$PATH:/usr/local/spark/bin"
 ```
 
+# Ejecución
+
+## Idea 1
+En el caso de querer ejecutar esta idea en local, se debe ejecutar un comando como el siguiente:
+```bash
+$ spark-submit idea1_local.py "Nombre desarrolladora" "Genero"
+```
+
+En el caso de querer ejecutarlo en un cluster, se debería ejecutar lo siguiente:
+```bash
+$ spark-submit --num-executors N --executor-cores M idea1_cluster.py "Nombre desarrolladora" "Genero"
+```
+Siendo "Nombre desarrolladora" y "Genero" datos escogidos del fichero pruebas.txt. Las variables N y M dependen del cluster lanzado.
+
+Estos dos, generarán una salida en la terminal de Apache Spark y otra en un fichero con formato CSV con los resultados obtenidos.
+
+## Idea 2
+Esta idea no se ha podido llevar a cabo en su completitud por la complejidad en el tratamiento de los datos. A pesar de esto, este tratamiento se realiza correctamente y es completamente funcional. Se puede comprobar con el siguiente comando:
+
+```bash
+$ spark-submit idea2.py
+```
+
 # Datasets
 
 * [Steam Store Games](https://www.kaggle.com/nikdavis/steam-store-games)
@@ -66,6 +92,12 @@ $ export PATH="$PATH:/usr/local/spark/bin"
 * [Intel Processors](https://www.kaggle.com/iliassekkaf/computerparts/)
 
 * [AMD Processors](http://cpudb.stanford.edu/manufacturers/1)
+
+# Miembros
+* Adrián Ogáyar Sánchez
+* Arturo Barbero Pérez
+* Jesús Verdúguez Gervaso
+* Pedro Martínez Gamero
 	
 
 
