@@ -76,7 +76,13 @@ $ spark-submit --num-executors N --executor-cores M idea1_cluster.py "Nombre des
 ```
 Siendo "Nombre desarrolladora" y "Genero" datos escogidos del fichero pruebas.txt. Las variables N y M dependen del cluster lanzado.
 
-Estos dos, generarán una salida en la terminal de Apache Spark y otra en un fichero con formato CSV con los resultados obtenidos.
+Estos dos scripts, generarán una salida en la terminal de Apache Spark y otra en un fichero con formato CSV con los resultados obtenidos.
+
+En cuanto al script de las gráficas, valdría con poner un comando en la terminal como el siguiente:
+```bash
+$  python3 graph.py "rankingPara_.csv" "Genero"
+``` 
+Siendo "rankingPara_.csv" los resultados que acabamos de generar.
 
 ## Idea 2
 Esta idea no se ha podido llevar a cabo en su completitud por la complejidad en el tratamiento de los datos. A pesar de esto, este tratamiento se realiza correctamente y es completamente funcional. Se puede comprobar con el siguiente comando:
