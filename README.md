@@ -21,8 +21,8 @@ Los scripts que se han desarrollado se pueden ver en su correspondiente carpeta 
 ```bash
 ├── Scripts
 │   ├── idea1
-│   │   ├── idea1_local.py: Fichero que realiza las recomendaciones en modo local. Este permite aprovecharse de los núcleos de tu 	│   │   │	ordenador además de tener la ruta del dataset enlazada a su carpeta. 
-│   │   ├── idea1_cluster.py: Fichero que realiza las recomendaciones en un cluster. Está preparado para poder acceder al dataset una   │   │  	│	vez esté ubicado en el sistema de ficheros de Hadoop.   
+│   │   ├── idea1_local.py: Fichero que realiza las recomendaciones en modo local. Este permite aprovecharse de los núcleos de tu ordenador además de tener la ruta del dataset enlazada a su carpeta. 
+│   │   ├── idea1_cluster.py: Fichero que realiza las recomendaciones en un cluster. Está preparado para poder acceder al dataset una vez esté ubicado en el sistema de ficheros de Hadoop.   
 │   │   ├── rankingPara_.csv: Ficheros con los resultados generados por los scripts.
 │   │   ├── graph.py: Fichero que permite crear las gráficas con los archivos CSV que generan los scripts mencionados anteriormente.
 │   │	├── pruebas.txt: Contiene posibles desarrolladoras y géneros que podríamos meter como entrada
