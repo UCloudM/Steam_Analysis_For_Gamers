@@ -2,7 +2,7 @@
 
 # COMANDO DE PRUEBA:
 # --------------------------------------------------------------------------
-# spark-submit idea3_cluster.py "Valve" "Action"
+# spark-submit idea1_local.py "Valve" "Action"
 # --------------------------------------------------------------------------
 
 
@@ -16,7 +16,7 @@ starting_point = time.time()
 
 
 # Local
-conf = SparkConf().setAppName('Script')
+conf = SparkConf().setMaster('local[4]').setAppName('Script')
 sc = SparkContext(conf=conf)
 sqlContext = SQLContext(sc)
 
@@ -29,8 +29,7 @@ genre = sys.argv[2]
 
 # LEEMOS EL DATASET EN FORMATO CSV
 # ----------------------------------
-pathSteam = "steam.csv"
-
+pathSteam = "../../datasets/steam.csv"
 
 steamDF = sqlContext.read.option("header", "true").csv(pathSteam)
 

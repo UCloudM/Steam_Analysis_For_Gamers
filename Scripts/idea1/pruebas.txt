@@ -1,0 +1,36 @@
+Desarrolladoras
+---------------
+Valve
+LucasArts
+2k
+Activision
+Ubisoft
+Digital Extremes
+Rockstar North
+Gearbox Software
+Infinity Ward
+Bohemia Interactive
+SpinTop Games
+Monte Cristo
+Treyarch
+Frogwares
+Nadeo
+Rockstar Games
+Deck 13
+Epic Games, Inc.
+Ubisoft Montreal
+
+
+Generos
+--------------
+Action
+Adventure
+Strategy
+Sports
+Racing
+Simulation
+Indie
+Casual
+RPG
+Free to Play
+
