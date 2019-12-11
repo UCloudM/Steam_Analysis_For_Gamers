@@ -11,7 +11,7 @@ import re'''
 
 
 conf = SparkConf().setMaster('local').setAppName('Script')
-sc = SparkContext(conf = conf)
+#sc = SparkContext(conf = conf)
 sqlContext = SQLContext(sc)
 
 #PATHS DE LOS DATASETS
@@ -102,5 +102,8 @@ intelRDD = intelDF.rdd.map(lambda p: (frecuencia(p["Processor_Base_Frequency"].s
 
 amdDF = amdDF.withColumn("Base Clock", 
                           functions.regexp_extract(amdDF["Base Clock"], '[0-9]*\.*[0-9]*', 0))
-amdDF = amdDF.withColumn("Base Clock", amdDF["Base Clock"]*1000*amdDF["# of CPU cores"])
                          
+amdRDD = amdDF.rdd.map(lambda p: (float(p["Base Clock"])*1000, 
+                                  (p["Family"],
+                                   p["# of CPU cores"],
+                                   p["Model"])))
