@@ -11,7 +11,7 @@ import re'''
 
 
 conf = SparkConf().setMaster('local').setAppName('Script')
-#sc = SparkContext(conf = conf)
+sc = SparkContext(conf = conf)
 sqlContext = SQLContext(sc)
 
 #PATHS DE LOS DATASETS
@@ -67,8 +67,7 @@ reqDF = reqDF.withColumn('minimum',
 amdDF = amdDF[~amdDF["Base Clock"].contains("MHz")]
 
 #MAPEAMOS EL DATASET DE INTEL
-#(Nº PROCESADOR, GENERACION, FRECUENCIA (EN MHZ)) <--Seria mejor colocar 
-#la frecuencia como clave para agruparlos y tenerlos mas a mano al comparar (?)
+#(FRECUENCIA (EN MHZ), Nº PROCESADOR, Nº NUCLEOS, GENERACIOn)
 #----------------------------------------------
 def frecuencia(freq) :
     if freq[1] == "GHz":
@@ -92,36 +91,16 @@ def frecuencia(freq) :
         return gen[3] + " Family"
     elif gen[4] == "Series":
         return gen[3] + " Series"
-    
-#Sin comprobar
-    elif gen[5] == "Family":
-        if gen[4] == "Product":
-            return gen[3] + " Product Family"
-        if gen[2] == "Processor":
-            return gen[3] + " " + gen[4] + " Family"
-        return gen[4] + " Family"
-    elif gen[5] == "Processors":
-        if gen[1] == "Generation":
-            return gen[0] + " Generation " + gen[4]
     else:
         return "null"'''
         
 
-intelRDD = intelDF.rdd.map(lambda p: (p["Processor_Number"],
+intelRDD = intelDF.rdd.map(lambda p: (frecuencia(p["Processor_Base_Frequency"].split(" ")),
                                       (p["Product_Collection"],
                                        p["nb_of_Cores"],
-                                       p["Processor_Base_Frequency"])))
-
-prueba = (intelRDD
-            .mapValues(lambda p: (p[0], p[1], p[2].split(" ")))
-            .mapValues(lambda p: (p[0], frecuencia(p[2]) * float(p[1]))))
-
+                                       p["Processor_Number"])))
 
 amdDF = amdDF.withColumn("Base Clock", 
                           functions.regexp_extract(amdDF["Base Clock"], '[0-9]*\.*[0-9]*', 0))
 amdDF = amdDF.withColumn("Base Clock", amdDF["Base Clock"]*1000*amdDF["# of CPU cores"])
-
-
-#Pruebas
-#----------------------
-uno = intelRDD.filter(lambda p: (len(p[1][0]) == 5) & (p[1][0][4] == "Family"))    
+                         
